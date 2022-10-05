@@ -1,21 +1,29 @@
 package lst.spring.Entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+@Getter
+@Setter
+@ToString(exclude = "boardList")
 @Entity
 @Table(name = "USER")
-@Data
 public class User {
 	@Id
 	@GeneratedValue
@@ -31,4 +39,7 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	private boolean enabled;
+	
+	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	private List<Board> boardList = new ArrayList<Board>();
 }
