@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,17 +24,17 @@ import lombok.ToString;
 @Table(name = "BOARD")
 public class Board {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long seq;
 	private String title;
 	private String content;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(updatable = false)
+	@Column(updatable = false, name="REGDATE")
 	private Date regDate = new Date();
 	@Column(updatable = false)
 	private Long cnt = 0L;
 	
 	@ManyToOne
-	@JoinColumn(name = "MEMBER_ID", nullable = false, updatable = false)
+	@JoinColumn(name = "ID", nullable = false, updatable = false)
 	private User user;
 }	

@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,20 +27,21 @@ import lombok.ToString;
 @Table(name = "USER")
 public class User {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long seq;
+	@Column(name = "ID")
 	private String id;
 	private String password;
 	private String nickname;
 	private String email;
 	private String phone;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(updatable = false)
+	@Column(updatable = false, name = "REGDATE")
 	private Date regDate = new Date();
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	private boolean enabled;
 	
-	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<Board> boardList = new ArrayList<Board>();
 }
