@@ -26,9 +26,8 @@ import lombok.ToString;
 @Entity
 @Table(name = "USER")
 public class User {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long seq;
 	@Column(name = "ID")
 	private String id;
 	private String password;
