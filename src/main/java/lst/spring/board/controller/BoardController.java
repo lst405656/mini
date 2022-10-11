@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lst.spring.Entity.Board;
@@ -24,5 +26,25 @@ public class BoardController {
 	public String getBoard(Model model, Board board) {
 		model.addAttribute("board", boardService.getBoard(board));
 		return "board/getBoard";
+	}
+	@GetMapping("/insertBoard")
+	public String insertBoardView() {
+		return "board/insertBoard";
+	}
+	@PostMapping("/insertBoard")
+	public String insertBoard(Board board) {
+		boardService.insertBoard(board);
+		return "redirect:getBoardList";
+	}
+	
+	@PostMapping("/updateBoard")
+	public String updateBoard(Board board) {
+		boardService.updateBoard(board);
+		return "forward:getBoardList";
+	}
+	@GetMapping("/deleteBoard")
+	public String deleteBoard(Board board) {
+		boardService.deleteBoard(board);
+		return "forward:getBoardList";
 	}
 }

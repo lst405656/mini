@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lst.spring.Entity.Board;
+import lst.spring.Entity.User;
 import lst.spring.Repository.BoardRepository;
 
 @Service
@@ -15,7 +16,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardRepository boardRepo;
-
+	
 	@Override
 	public void insertBoard(Board board) {
 		boardRepo.save(board);
