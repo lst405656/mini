@@ -2,6 +2,7 @@ package lst.spring.board.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lst.spring.Entity.Board;
 import lst.spring.board.service.BoardService;
+import lst.spring.security.SecurityUser;
 
 @Controller
 @RequestMapping("/board/")
@@ -32,7 +34,8 @@ public class BoardController {
 		return "board/insertBoard";
 	}
 	@PostMapping("/insertBoard")
-	public String insertBoard(Board board) {
+	public String insertBoard(Board board, @AuthenticationPrincipal SecurityUser principal) {
+		board.setUser(principal.getMember());
 		boardService.insertBoard(board);
 		return "redirect:getBoardList";
 	}
