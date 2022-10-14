@@ -35,7 +35,7 @@ public class BoardController {
 	}
 	@PostMapping("/insertBoard")
 	public String insertBoard(Board board, @AuthenticationPrincipal SecurityUser principal) {
-		board.setUser(principal.getMember());
+		board.setUser(principal.getUser());
 		boardService.insertBoard(board);
 		return "redirect:getBoardList";
 	}

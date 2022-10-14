@@ -67,6 +67,15 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
+		<!-- 타임리프 스프링 시큐리티 연동 -->
+		<dependency>
+		    <groupId>org.thymeleaf.extras</groupId>
+		    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
+		
+		
 	</dependencies>
 
 	<build>
