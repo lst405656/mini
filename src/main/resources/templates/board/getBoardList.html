@@ -1,19 +1,34 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <title>게시글 목록</title>
 </head>
 <body th:align="center">
 	<h1>게시글 목록</h1>
-		<span sec:authorize="isAuthenticated()">
-		<b>
-			<font color="blue">
-				<span sec:authentication="principal.user.nickname"></span>
-			</font>
-		</b>님 환영합니다. <a th:href="@{/system/logout}">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<span sec:authorize="isAuthenticated()"> <b> <font
+			color="blue"> <span
+				sec:authentication="principal.user.nickname"></span>
+		</font>
+	</b>님 환영합니다. <a th:href="@{/system/logout}">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		<a th:href="@{/admin/adminMain}">게시판 관리</a>
-		</span>
+	</span>
 	<hr>
+	<form th:action="@{/board/getBoardList}" method="post">
+		<table th:align="center" th:border="1" th:cellspacing="0"
+			th:cellpadding="0" th:width="700">
+			<tr>
+				<td align="right">
+				<select name="searchCondition">
+						<option value="TITLE">제목</option>
+						<option value="CONTENT">내용</option>
+				</select> <input name="searchKeyword" type="text" />
+				<input type="submit" value="검색" /></td>
+			</tr>
+		</table>
+	</form>
+
+
 	<table th:align="center" th:border="1" th:cellspacing="0"
 		th:cellpadding="0" th:width="700">
 		<tr>

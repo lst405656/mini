@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lst.spring.Entity.Board;
+import lst.spring.Entity.Search;
 import lst.spring.board.service.BoardService;
 import lst.spring.security.SecurityUser;
 
@@ -19,8 +20,9 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	@RequestMapping("/getBoardList")
-	public String getBoardList(Model model, Board board) {
+	public String getBoardList(Model model, Board board, Search search) {
 		Page<Board> boardList = boardService.getBoardList(board);
+		Page<Board> searchList = boardService.getBoardList(search);
 		model.addAttribute("boardList", boardList);
 		return "board/getBoardList";
 	}

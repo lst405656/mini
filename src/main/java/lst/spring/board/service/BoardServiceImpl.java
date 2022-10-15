@@ -7,8 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.querydsl.core.BooleanBuilder;
+
+import lst.spring.Entity.QBoard;
 import lst.spring.Entity.Board;
-import lst.spring.Entity.User;
+import lst.spring.Entity.Search;
 import lst.spring.Repository.BoardRepository;
 
 @Service
@@ -16,7 +19,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardRepository boardRepo;
-	
+
 	@Override
 	public void insertBoard(Board board) {
 		boardRepo.save(board);
@@ -42,5 +45,21 @@ public class BoardServiceImpl implements BoardService {
 		Pageable pageable = PageRequest.of(0, 10, Sort.Direction.DESC, "seq");
 		return boardRepo.getBoardList(pageable);
 	}
+
+	@Override
+	public Page<Board> getBoardList(Search search) {
+		BooleanBuilder builder = new BooleanBuilder();
+		QBoard qboard = QBoard.board;
+
+		if(search.getSearchCondition().equals("TITLE")) {
+			builder.and(qboard.title.like("%" + search.getSearchKeyword()+"%"));
+		}else if(search.getSearchCondition().equals("CONTENT")) {
+			builder.and(
+					qboard.content.like("%" + search.getSearchKeyword()+"%"));
+		}
+		Pageable pageable = PageRequest.of(0, 10, Sort.Direction.DESC, "seq");
+		return boardRepo.findAll(builder, pageable);
+	}
+	
 
 }
