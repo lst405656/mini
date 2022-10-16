@@ -10,6 +10,6 @@ public interface BoardService {
 	void updateBoard(Board board);
 	void deleteBoard(Board board);
 	Board getBoard(Board board);
-	Page<Board> getBoardList(Board board);
+	Page<Board> getBoardList(Board board, int page);
 	Page<Board> getBoardList(Search search);
 }

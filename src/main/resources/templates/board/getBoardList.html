@@ -18,12 +18,11 @@
 		<table th:align="center" th:border="1" th:cellspacing="0"
 			th:cellpadding="0" th:width="700">
 			<tr>
-				<td align="right">
-				<select name="searchCondition">
+				<td align="right"><select name="searchCondition">
 						<option value="TITLE">제목</option>
 						<option value="CONTENT">내용</option>
-				</select> <input name="searchKeyword" type="text" />
-				<input type="submit" value="검색" /></td>
+				</select> <input name="searchKeyword" type="text" /> <input type="submit"
+					value="검색" /></td>
 			</tr>
 		</table>
 	</form>
@@ -48,6 +47,23 @@
 			<td th:text="${board.cnt}" th:align="center">
 		</tr>
 	</table>
+	<div th:if="${!boardList.isEmpty()}">
+			<div class="page-item"
+				th:classappend="${!boardList.hasPrevious} ? 'disabled'"><a
+				class="page-link" th:href="@{|?page=${boardList.number-1}|}"> <span>이전</span>
+			</a></div>
+			<div th:each="page: ${#numbers.sequence(0, boardList.totalPages-1)}"
+				th:classappend="${page == boardList.number} ? 'active'"
+				class="page-item"><a th:text="${page}" class="page-link"
+				th:href="@{|?page=${page}|}"></a></div>
+			<div class="page-item"
+				th:classappend="${!boardList.hasNext} ? 'disabled'"><a
+				class="page-link" th:href="@{|?page=${boardList.number+1}|}"> <span>다음</span>
+			</a></div>
+	</div>
+
+
+
 	<br>
 	<a th:href="@{/board/insertBoard}">게시글 등록</a>
 </body>

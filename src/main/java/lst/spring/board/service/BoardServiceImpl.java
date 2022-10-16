@@ -41,8 +41,8 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepo.findById(board.getSeq()).get();
 	}
 	@Override
-	public Page<Board> getBoardList(Board board) {
-		Pageable pageable = PageRequest.of(0, 10, Sort.Direction.DESC, "seq");
+	public Page<Board> getBoardList(Board board, int page) {
+		Pageable pageable = PageRequest.of(page, 10, Sort.Direction.DESC, "seq");
 		return boardRepo.getBoardList(pageable);
 	}
 

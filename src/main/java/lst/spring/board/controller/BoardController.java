@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lst.spring.Entity.Board;
 import lst.spring.Entity.Search;
@@ -19,13 +20,20 @@ import lst.spring.security.SecurityUser;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
-	@RequestMapping("/getBoardList")
-	public String getBoardList(Model model, Board board, Search search) {
-		Page<Board> boardList = boardService.getBoardList(board);
-		Page<Board> searchList = boardService.getBoardList(search);
+	@GetMapping("/getBoardList")
+	public String getBoardList(Model model, Board board, Search search, @RequestParam(value="page", defaultValue="0")int page) {
+		Page<Board> boardList = boardService.getBoardList(board, page);
+		System.out.println(boardList);
 		model.addAttribute("boardList", boardList);
 		return "board/getBoardList";
 	}
+	@PostMapping("/getBoardList")
+	public String getSearchList(Model model, Search search) {
+		Page<Board> searchList = boardService.getBoardList(search);
+		model.addAttribute("boardList", searchList);
+		return "board/getBoardList";
+	}
+	
 	@RequestMapping("/getBoard")
 	public String getBoard(Model model, Board board) {
 		model.addAttribute("board", boardService.getBoard(board));
