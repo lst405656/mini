@@ -75,9 +75,14 @@ public class BoardRepositoryTest {
 	//		}
 
 	public void testInsert() {
-		User user1 = new User("user", "손오공", encoder.encode("1111"), "lst4056@naver.com",Role.ROLE_USER);
+		User user1 = new User();
+		user1.setId("user");
+		user1.setPassword(encoder.encode("1111"));
+		user1.setNickname("손오공");
+		user1.setRole(Role.ROLE_USER);
+		user1.setEnabled(true);
 		userRepo.save(user1);
-		User user2 = new User(null, null, null, null, null);
+		User user2 = new User();
 		user2.setId("admin");
 		user2.setPassword(encoder.encode("2222"));
 		user2.setNickname("사오정");

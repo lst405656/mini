@@ -1,5 +1,6 @@
 package lst.spring.Entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,10 +16,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.hibernate.annotations.CreationTimestamp;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 @Getter
@@ -26,6 +27,7 @@ import lombok.ToString;
 @ToString(exclude = "boardList")
 @Entity
 @Table(name = "USER")
+@NoArgsConstructor
 public class User {
 
 	@Id
@@ -35,34 +37,14 @@ public class User {
 	private String nickname;
 	private String email;
 	private String phone;
-	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	@Column(updatable = false, name = "REGDATE")
-	private Date regDate = new Date();
+	private LocalDateTime regDate;
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	private boolean enabled;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<Board> boardList = new ArrayList<Board>();
-	
-	 @Builder
-	    public User(String id, String nickname, String email, String password, Role role) {
-	        this.id = id;
-		 	this.nickname = nickname;
-	        this.email = email;
-	        this.password = password;
-	        this.role = role;
-	    }
-	
-	public static User createUser(UserFormat userFormat, PasswordEncoder passwordEncoder) {
-        User user = User.builder()
-        		.id(userFormat.getId())
-                .nickname(userFormat.getNickname())
-                .email(userFormat.getEmail())
-                .password(passwordEncoder.encode(userFormat.getPassword()))  //암호화처리
-                .role(Role.ROLE_USER)
-                .build();
-        return user;
-    }
 	
 }

@@ -5,19 +5,38 @@
 </head>
 <body th:align="center">
 	<h1>회원가입</h1>
-	<form method="post">
+	<form th:action="@{/system/register}" th:object="${format}" method="post">
 		<table th:align="center" th:border="1" th:cellspacing="0"
 			th:cellpadding="0">
+			<tr th:replace="system/error :: formErrorsFragment"></tr>
 			<tr>
 				<td bgcolor="orange">아이디</td>
-				<td><input type="text" name="username" /></td>
+				<td><input type="text" th:field="*{id}" /></td>
+			</tr>
+			<tr>
+				<td bgcolor="orange">닉네임</td>
+				<td><input type="text" th:field="*{nickname}"/></td>
 			</tr>
 			<tr>
 				<td bgcolor="orange">패스워드</td>
-				<td><input type="password" name="password" /></td>
+				<td><input type="password" th:field="*{password1}"  /></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit" value="로그인" />
+				<td bgcolor="orange">패스워드 확인</td>
+				<td><input type="password" th:field="*{password2}" /></td>
+			</tr>
+			<tr>
+				<td bgcolor="orange">이메일</td>
+				<td><input type="text" th:field="*{email}"  /></td>
+			</tr>
+			<tr>
+				<td bgcolor="orange">핸드폰번호</td>
+				<td><input type="text" th:field="*{phone}"  /></td>
+			</tr>
+			
+			
+			<tr>
+				<td colspan="2" align="center"><input type="submit" value="회원가입" />
 				</td>
 			</tr>
 		</table>
