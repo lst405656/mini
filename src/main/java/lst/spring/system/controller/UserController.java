@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,8 +30,7 @@ public class UserController{
 	}
 	
 	@PostMapping("/register")
-	public String reg(@Valid UserFormat format, BindingResult result, Model model) {
-		System.out.println("1");
+	public String reg(@ModelAttribute("format")@Valid UserFormat format, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			return "system/register";
 		}
