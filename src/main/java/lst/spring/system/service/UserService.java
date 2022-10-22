@@ -4,6 +4,6 @@ import lst.spring.Entity.User;
 
 public interface UserService {
 
-	void saveUser(User user);
+	public void saveUser(User user);
     
 }

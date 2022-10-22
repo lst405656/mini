@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>게시글 목록</title>
+</head>
+<link rel="stylesheet" type="text/css" th:href="@{/css/mainTeplate.css}">
+<body>
+<header>
+	<span sec:authorize="isAuthenticated()"> <b> <font
+			color="blue"> <span
+				sec:authentication="principal.user.nickname"></span>
+		</font>
+	</b>님 환영합니다. <a th:href="@{/system/logout}">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		
+	</span>
+</header>
+	
+<article>
+	<div class="calFrame">
+		<div class="title"></div>
+		<div class="calendar">
+			<div class="moveBtn"><button>이전</button></div>
+			<div class="month">월</div>
+			<div class="moveBtn"><button>다음</button></div>
+		</div>
+		<div class="calendar">
+			<div>일</div>			
+			<div>월</div>			
+			<div>화</div>			
+			<div>수</div>			
+			<div>목</div>			
+			<div>금</div>			
+			<div>토</div>			
+		</div>
+		<div class="calendar">
+			<div class="day"></div>
+		</div>
+	</div>
+</article>
+
+<footer>
+
+</footer>
+	
+	
+</body>
+</html>

@@ -20,7 +20,7 @@ public class SecurityConfig {
 		security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
 		security.csrf().disable();
 		security.formLogin().loginPage("/system/login")
-		.defaultSuccessUrl("/board/getBoardList", true);
+		.defaultSuccessUrl("/system/main", true);
 		security.exceptionHandling().accessDeniedPage("/system/accessDenied");
 		security.logout().logoutUrl("/system/logout").invalidateHttpSession(true).logoutSuccessUrl("/");
 		return security.build();

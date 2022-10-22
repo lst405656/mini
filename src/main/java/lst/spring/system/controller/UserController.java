@@ -46,9 +46,25 @@ public class UserController{
 		user.setPhone(format.getPhone());
 		user.setEmail(format.getEmail());
 		user.setRole(Role.ROLE_USER);
-		System.out.println(user);
+		user.setEnabled(true);
 		userservice.saveUser(user);
 		model.addAttribute("format",format);
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/main")
+	public String main(){
+		
+		return "system/main";
+	}
+	
+	@RequestMapping("/calendar")
+	public String nowCalendar(Model model) {
+		
+		
+		
+		
+		return "system/calendar";
+	}
+	
 }

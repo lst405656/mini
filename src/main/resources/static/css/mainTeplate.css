@@ -1,0 +1,23 @@
+@charset "UTF-8";
+body{
+	width :1200px;
+	height:100%;
+}
+header{
+	height:130px;
+}
+article{
+	margin-top:20px;
+	margin-bottom:20px;
+	flex:1;
+}
+footer{
+	height:250px;
+}
+
+.calendar{
+	width:500px;
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
