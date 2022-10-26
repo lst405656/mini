@@ -21,7 +21,7 @@
 		<div class="title"></div>
 		<div class="calendar">
 			<div class="moveBtn"><button>이전</button></div>
-			<div class="month" th:text="${month}\월"></div>
+			<div class="month" th:text="${month}"></div>
 			<div class="moveBtn"><button>다음</button></div>
 		</div>
 		<div class="calendar">
@@ -34,9 +34,9 @@
 			<div>토</div>			
 		</div>
 		<div class="calendar">
-			<div class="week" th:each="cal : ${calendar}">
+	 		<div class="week" th:each="cal : ${calendar}">
 				<div class="day" th:each="index, i : ${#numbers.sequence(0,6)}">
-					<div th:text="${cal[i]}"></div>
+					<div th:text="${cal[i.index]}"></div>
 				</div>
 			</div>
 		</div>

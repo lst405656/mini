@@ -1,5 +1,9 @@
 package lst.spring.system.controller;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lst.spring.Entity.Role;
 import lst.spring.Entity.User;
 import lst.spring.Entity.UserFormat;
+import lst.spring.system.calendar.CalendarService;
 import lst.spring.system.service.UserService;
 
 @Controller
@@ -22,6 +27,9 @@ public class UserController{
 	
 	@Autowired
 	private UserService userservice;
+
+	@Autowired
+	private CalendarService calendarservice;
 	
 	@GetMapping("/register")
 	public String reg(UserFormat format, Model model) {
@@ -53,16 +61,22 @@ public class UserController{
 	}
 	
 	@RequestMapping("/main")
-	public String main(){
+	public String main(Model model){
+		List<List<Integer>> calendar = new ArrayList<List<Integer>>();
+		calendar = calendarservice.calendarView();
+		LocalDate now = LocalDate.now();
+		int month = now.getMonth().getValue();
 		
+		System.out.println(calendar);
+		
+		
+		model.addAttribute("month",month);
+		model.addAttribute("calendar",calendar);
 		return "system/main";
 	}
 	
 	@RequestMapping("/calendar")
 	public String nowCalendar(Model model) {
-		
-		
-		
 		
 		return "system/calendar";
 	}
