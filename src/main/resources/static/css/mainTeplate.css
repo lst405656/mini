@@ -21,3 +21,13 @@ footer{
 	flex-direction: row;
 	justify-content: space-between;
 }
+.week{
+	width:500px;
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.day{
+	width:18px;
+	text-align:right;
+}

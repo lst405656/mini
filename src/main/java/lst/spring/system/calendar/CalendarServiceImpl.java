@@ -39,13 +39,15 @@ public class CalendarServiceImpl implements CalendarService {
 		LocalDate firstDay = now.withDayOfMonth(1);
 		int last = lastDay(year,month);
 		int first = firstDay.getDayOfWeek().getValue();
+		int prelast= lastDay(year,month-1);//이전달 마지막날
+		
 		
 		if(first==7) {
 			first = 0;
 		}
 		//빈자리 0채우기
-		for(int x =0; x<first; x++) {
-			week.add(0);
+		for(int x =0, k=prelast-first+1; x<first; x++, k++) {
+			week.add(k);
 		}
 		//남은자리부터 날짜 채우기
 		for(int y=1; y<=7-first; y++) {
@@ -62,7 +64,17 @@ public class CalendarServiceImpl implements CalendarService {
 				calendar.add(temp);
 				week.clear();
 			}
+			if(i==last) {
+				temp = new ArrayList<Integer>(week);
+				for(int n =1 ; n <= (7-j%7);n++) {
+					temp.add(n);
+				}
+				calendar.add(temp);
+				week.clear();
+			}
 		}
+		
+		
 		
 		
 		return calendar;

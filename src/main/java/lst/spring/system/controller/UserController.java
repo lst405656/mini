@@ -67,9 +67,6 @@ public class UserController{
 		LocalDate now = LocalDate.now();
 		int month = now.getMonth().getValue();
 		
-		System.out.println(calendar);
-		
-		
 		model.addAttribute("month",month);
 		model.addAttribute("calendar",calendar);
 		return "system/main";
