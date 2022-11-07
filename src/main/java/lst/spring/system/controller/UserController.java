@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -62,19 +63,39 @@ public class UserController{
 	
 	@RequestMapping("/main")
 	public String main(Model model){
-		List<List<Integer>> calendar = new ArrayList<List<Integer>>();
-		calendar = calendarservice.calendarView();
 		LocalDate now = LocalDate.now();
+		int year = now.getYear();
 		int month = now.getMonth().getValue();
 		
+		List<List<Integer>> calendar = new ArrayList<List<Integer>>();
+		calendar = calendarservice.calendarView(year, month);
+		
 		model.addAttribute("month",month);
+		model.addAttribute("year", year);
 		model.addAttribute("calendar",calendar);
 		return "system/main";
 	}
 	
-	@RequestMapping("/calendar")
-	public String nowCalendar(Model model) {
+	@RequestMapping("/{year}/{month}")
+	public String nowCalendar(Model model, @PathVariable int year, @PathVariable int month) {
 		
+		List<List<Integer>> calendar = new ArrayList<List<Integer>>();
+		if(month==13) {
+			month =1;
+			year += 1;
+		}
+		if(month==0) {
+			month = 12;
+			year -= 1;
+		}
+		System.out.println(month);
+		System.out.println(year);
+		
+		calendar = calendarservice.calendarView(year, month);
+		
+		model.addAttribute("month",month);
+		model.addAttribute("year", year);
+		model.addAttribute("calendar",calendar);
 		return "system/calendar";
 	}
 	

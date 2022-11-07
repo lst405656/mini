@@ -9,11 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class CalendarServiceImpl implements CalendarService {
 
-	LocalDate now = LocalDate.now();
-	int year = now.getYear();
-	int month = now.getMonth().getValue();
-	int day = now.getDayOfMonth();
-	
 	public boolean isLeapYear(int year) {
 		return (year % 4 ==0) && (year % 100 !=0) ||(year % 400 ==0);
 	}
@@ -33,12 +28,18 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 	
 	@Override
-	public List<List<Integer>> calendarView() {
+	public List<List<Integer>> calendarView(int year, int month) {
 		List<Integer> week = new ArrayList<Integer>();
 		List<List<Integer>> calendar = new ArrayList<List<Integer>>();
-		LocalDate firstDay = now.withDayOfMonth(1);
+		LocalDate dates = LocalDate.of(year, month, 1);
+		LocalDate firstDay = dates.withDayOfMonth(1);
+		
 		int last = lastDay(year,month);
-		int first = firstDay.getDayOfWeek().getValue();
+		int first = firstDay.getDayOfWeek().getValue();//첫번재 날 요일
+		if(month==1) {
+			month = 12;
+			year -= 1;
+		}
 		int prelast= lastDay(year,month-1);//이전달 마지막날
 		
 		
