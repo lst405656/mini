@@ -29,9 +29,6 @@ public class UserController{
 	@Autowired
 	private UserService userservice;
 
-	@Autowired
-	private CalendarService calendarservice;
-	
 	@GetMapping("/register")
 	public String reg(UserFormat format, Model model) {
 		model.addAttribute("format",format);
@@ -67,36 +64,10 @@ public class UserController{
 		int year = now.getYear();
 		int month = now.getMonth().getValue();
 		
-		List<List<Integer>> calendar = new ArrayList<List<Integer>>();
-		calendar = calendarservice.calendarView(year, month);
-		
 		model.addAttribute("month",month);
 		model.addAttribute("year", year);
-		model.addAttribute("calendar",calendar);
 		return "system/main";
 	}
 	
-	@RequestMapping("/{year}/{month}")
-	public String nowCalendar(Model model, @PathVariable int year, @PathVariable int month) {
-		
-		List<List<Integer>> calendar = new ArrayList<List<Integer>>();
-		if(month==13) {
-			month =1;
-			year += 1;
-		}
-		if(month==0) {
-			month = 12;
-			year -= 1;
-		}
-		System.out.println(month);
-		System.out.println(year);
-		
-		calendar = calendarservice.calendarView(year, month);
-		
-		model.addAttribute("month",month);
-		model.addAttribute("year", year);
-		model.addAttribute("calendar",calendar);
-		return "system/calendar";
-	}
 	
 }

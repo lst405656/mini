@@ -42,3 +42,9 @@ footer{
 	justify-content: center;
 	align-items: center;
 }
+.sun{
+	color:red;
+}
+.sat{
+	color:blue;
+}

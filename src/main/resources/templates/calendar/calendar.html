@@ -1,10 +1,54 @@
-<!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>캘린더</title>
 </head>
+<link rel="stylesheet" type="text/css" th:href="@{/css/mainTeplate.css}">
 <body>
+<header>
+	<span sec:authorize="isAuthenticated()"> 
+		<b>
+			<font color="blue">
+				<span sec:authentication="principal.user.nickname"></span>
+			</font>
+		</b>님 환영합니다. <a th:href="@{/system/logout}">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a th:href="@{/system/main}">메인으로</a>	
+	</span>
+</header>
+	
+<article>
+	<div class="calFrame">
+		<div class="title"></div>
+		<div class="calendar">
+			<div class="moveBtn"><a th:href="@{/calendar/{year}/{month}(year=${year}, month=${month}-1)}">이전</a></div>
+			<div class="month" th:text="${month}"></div>
+			<div class="moveBtn"><a th:href="@{/calendar/{year}/{month}(year=${year}, month=${month}+1)}">다음</a></div>
+		</div>
+		<div class="calendar">
+			<div class="day sun">일</div>			
+			<div class="day">월</div>			
+			<div class="day">화</div>			
+			<div class="day">수</div>			
+			<div class="day">목</div>			
+			<div class="day">금</div>			
+			<div class="day sat">토</div>			
+		</div>
+		
+ 		<div class="week" th:each="cal : ${calendar}">
+			<div class="day" th:each="index, i : ${#numbers.sequence(0,6)}">
+				<div th:if="${index eq 0}" th:text="${cal[i.index]}" class="sun"></div>
+				<div th:if="${index eq 6}" th:text="${cal[i.index]}" class="sat"></div>
+				<div th:unless="${index eq 0} or ${index eq 6}" th:text="${cal[i.index]}"></div>
+			</div>
+		</div>
+	</div>
+</article>
 
+<footer>
+
+</footer>
+	
+	
 </body>
 </html>
