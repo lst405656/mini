@@ -37,7 +37,7 @@
 		
  		<div class="week" th:each="cal : ${calendar}">
 			<div class="day" th:each="index, i : ${#numbers.sequence(0,6)}">
-				<div th:if="${index eq 0}" th:text="${cal[i.index]}" class="sun"></div>
+				<div th:if="${index eq 0}" th:text="${cal[i.index]}" class="sun" th:onclick="openPlan()"></div>
 				<div th:if="${index eq 6}" th:text="${cal[i.index]}" class="sat"></div>
 				<div th:unless="${index eq 0} or ${index eq 6}" th:text="${cal[i.index]}"></div>
 			</div>
@@ -51,4 +51,9 @@
 	
 	
 </body>
+<script>
+function openPlan(){
+	window.open('/calendar/plan',"_blank","width=500, height=500, top=50, left=500");
+}
+</script>
 </html>

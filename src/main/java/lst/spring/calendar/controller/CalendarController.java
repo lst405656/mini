@@ -31,14 +31,17 @@ public class CalendarController {
 			month = 12;
 			year -= 1;
 		}
-		System.out.println(month);
-		System.out.println(year);
-		
 		calendar = calendarservice.calendarView(year, month);
 		
 		model.addAttribute("month",month);
 		model.addAttribute("year", year);
 		model.addAttribute("calendar",calendar);
 		return "calendar/calendar";
+	}
+	
+	@RequestMapping("/plan")
+	public String plan(Model model) {
+		
+		return "calendar/plan";
 	}
 }
