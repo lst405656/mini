@@ -24,7 +24,7 @@ public class Plan {
 	private Long seq;
 	private String title;
 	private Date planDate;
-	private Time planTime;
+	private String planTime;
 	
 	
 	@ManyToOne

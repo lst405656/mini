@@ -24,7 +24,7 @@ public class QPlan extends EntityPathBase<Plan> {
 
     public final DateTimePath<java.util.Date> planDate = createDateTime("planDate", java.util.Date.class);
 
-    public final TimePath<java.sql.Time> planTime = createTime("planTime", java.sql.Time.class);
+    public final StringPath planTime = createString("planTime");
 
     public final NumberPath<Long> seq = createNumber("seq", Long.class);
 
