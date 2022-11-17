@@ -4,11 +4,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lst.spring.Entity.Plan;
+import lst.spring.Repository.CalendarRepository;
 
 @Service
 public class CalendarServiceImpl implements CalendarService {
 
+	@Autowired
+	CalendarRepository cal;
+	
 	public boolean isLeapYear(int year) {
 		return (year % 4 ==0) && (year % 100 !=0) ||(year % 400 ==0);
 	}
@@ -79,6 +86,12 @@ public class CalendarServiceImpl implements CalendarService {
 		
 		
 		return calendar;
+	}
+
+	@Override
+	public void insertPlan(Plan plan) {
+		cal.save(plan);
+		System.out.print(plan);
 	}
 
 	

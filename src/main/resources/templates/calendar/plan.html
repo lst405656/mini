@@ -10,8 +10,9 @@
 <!-- <link rel="stylesheet" type="text/css" th:href=""> -->
 <body>
 <article>
-	<form id="myForm" action="#">
+	<form id="myForm" th:action="@{/calendar/plan}" method="post" onsubmit="closePlan()">
 		<div>
+			날짜 : <span th:text="${param.date}"></span>
 			제목 : <input type="text" >
 			<label for="time">시간 선택</label>
 			<input type="text" id="timepicker" name="timepicker" class="form-control" style="width:200px;">
@@ -20,6 +21,7 @@
 			<input type="submit"  value="저장">
 			<input type="button" value="닫기" onclick="closePlan()">
 		</div>
+		<input type="hidden" id="planDate" name="planDate" value="${param.date}">
 	</form>
 </article>
 

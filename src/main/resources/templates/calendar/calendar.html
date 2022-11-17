@@ -2,6 +2,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>캘린더</title>
 </head>
 <link rel="stylesheet" type="text/css" th:href="@{/css/mainTeplate.css}">
@@ -52,8 +53,12 @@
 	
 </body>
 <script>
+
 function openPlan(){
-	window.open('/calendar/plan',"_blank","width=500, height=500, top=50, left=500");
+	let click = event.currentTarget;
+	var clickDate = click.innerText;
+	console.log(clickDate);
+	window.open('/calendar/plan?date='+ clickDate,"_blank","width=500, height=500, top=50, left=500, menubar=1");
 }
 </script>
 </html>

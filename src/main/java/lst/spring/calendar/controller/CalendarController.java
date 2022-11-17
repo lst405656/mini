@@ -6,9 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lst.spring.Entity.Plan;
 import lst.spring.system.calendar.CalendarService;
 
 
@@ -39,9 +42,16 @@ public class CalendarController {
 		return "calendar/calendar";
 	}
 	
-	@RequestMapping("/plan")
+	@GetMapping("/plan")
 	public String plan(Model model) {
 		
 		return "calendar/plan";
 	}
+	@PostMapping("/plan")
+	public String insertPlan(Model model, Plan plan) {
+		calendarservice.insertPlan(plan);
+		return "calendar/calendar";
+	}
+	
+	
 }
