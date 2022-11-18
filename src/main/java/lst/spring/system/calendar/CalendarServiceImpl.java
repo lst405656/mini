@@ -91,7 +91,6 @@ public class CalendarServiceImpl implements CalendarService {
 	@Override
 	public void insertPlan(Plan plan) {
 		cal.save(plan);
-		System.out.print(plan);
 	}
 
 	

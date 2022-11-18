@@ -52,13 +52,20 @@
 	
 	
 </body>
-<script>
-
+<script th:inline="javascript">
+    
 function openPlan(){
 	let click = event.currentTarget;
 	var clickDate = click.innerText;
-	console.log(clickDate);
-	window.open('/calendar/plan?date='+ clickDate,"_blank","width=500, height=500, top=50, left=500, menubar=1");
+	/*<![CDATA[*/
+	var month = /*[[${month}]]*/;
+	var year = /*[[${year}]]*/;
+	/*]]>*/
+	var date = year + '.' + month + '.' + clickDate;
+	console.log(date);
+	window.open('/calendar/plan?date='+ date,"_blank","width=500, height=500, top=50, left=500, menubar=1");
 }
+    
 </script>
+
 </html>

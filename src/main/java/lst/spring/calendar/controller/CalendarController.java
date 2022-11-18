@@ -1,9 +1,13 @@
 package lst.spring.calendar.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lst.spring.Entity.Plan;
+import lst.spring.security.SecurityUser;
 import lst.spring.system.calendar.CalendarService;
 
 
@@ -48,9 +53,14 @@ public class CalendarController {
 		return "calendar/plan";
 	}
 	@PostMapping("/plan")
-	public String insertPlan(Model model, Plan plan) {
+	public String insertPlan(Model model, Plan plan, @AuthenticationPrincipal SecurityUser principal, String strPlanDate) throws ParseException {
+		System.out.println(plan);
+		plan.setUser(principal.getUser());
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
+		Date date = formatter.parse(strPlanDate);
+		plan.setPlanDate(date);
 		calendarservice.insertPlan(plan);
-		return "calendar/calendar";
+		return "calendar/plan";
 	}
 	
 	
