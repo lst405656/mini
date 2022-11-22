@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lst.spring.Entity.Plan;
 import lst.spring.security.SecurityUser;
@@ -48,13 +50,16 @@ public class CalendarController {
 	}
 	
 	@GetMapping("/plan")
-	public String plan(Model model) {
-		
+	public String plan(Model model, Plan plan,@RequestParam(value="date")String strPlanDate, @RequestParam(value="page", defaultValue="0")int page) throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
+		Date date = formatter.parse(strPlanDate);
+		Page<Plan> planList= calendarservice.getPlanList(plan, page, date);
+		System.out.println(planList);
+		model.addAttribute("myPlanList",planList);
 		return "calendar/plan";
 	}
 	@PostMapping("/plan")
 	public String insertPlan(Model model, Plan plan, @AuthenticationPrincipal SecurityUser principal, String strPlanDate) throws ParseException {
-		System.out.println(plan);
 		plan.setUser(principal.getUser());
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
 		Date date = formatter.parse(strPlanDate);

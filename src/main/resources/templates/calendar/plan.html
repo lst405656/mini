@@ -15,10 +15,12 @@
 		날짜 : <span th:text="${param.date}"></span>
 	</div>
 	
-	<div id="planContent">
-		
+	<div id="myPlanContent" th:each="myPlan, satate : ${myPlanList}">
+		<div th:text="|${myPlan.title} , ${myPlan.planTime}|"></div>
 	</div>
+	<div id="famillyPlanContent">
 	
+	</div>
 	<div>
 		<button id="add" onclick="openSubmit()"></button>
 	</div>

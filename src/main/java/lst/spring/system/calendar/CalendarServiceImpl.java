@@ -2,9 +2,14 @@ package lst.spring.system.calendar;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lst.spring.Entity.Plan;
@@ -91,6 +96,12 @@ public class CalendarServiceImpl implements CalendarService {
 	@Override
 	public void insertPlan(Plan plan) {
 		cal.save(plan);
+	}
+
+	@Override
+	public Page<Plan> getPlanList(Plan plan, int page, Date date) {
+		Pageable pageable = PageRequest.of(page, 10, Sort.Direction.DESC, "seq");
+		return cal.findbyPlanDate(pageable, date);
 	}
 
 	

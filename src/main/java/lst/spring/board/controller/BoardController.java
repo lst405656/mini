@@ -23,7 +23,6 @@ public class BoardController {
 	@GetMapping("/getBoardList")
 	public String getBoardList(Model model, Board board, Search search, @RequestParam(value="page", defaultValue="0")int page) {
 		Page<Board> boardList = boardService.getBoardList(board, page);
-		System.out.println(boardList);
 		model.addAttribute("boardList", boardList);
 		return "board/getBoardList";
 	}
