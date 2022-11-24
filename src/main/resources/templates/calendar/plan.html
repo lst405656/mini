@@ -18,11 +18,11 @@
 	<div id="myPlanContent" th:each="myPlan, satate : ${myPlanList}">
 		<div th:text="|${myPlan.title} , ${myPlan.planTime}|"></div>
 	</div>
-	<div id="famillyPlanContent">
-	
+	<div id="familyPlanContent" th:each="familyPlan, state : ${familyPlanList}">
+		<div th:text="|${familyPlan.name}, ${familyPlan.title}, ${familyPlan.planTime}|"></div>
 	</div>
 	<div>
-		<button id="add" onclick="openSubmit()"></button>
+		<button id="add" onclick="openSubmit()">일정 추가</button>
 	</div>
 	<div class="hidden" id="submit">
 		<form id="myForm" th:action="@{/calendar/plan}" method="post" >

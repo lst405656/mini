@@ -25,7 +25,6 @@ public class Plan {
 	private Date planDate;
 	private String planTime;
 	
-	
 	@ManyToOne
 	@JoinColumn(name = "ID", nullable = false, updatable = false)
 	private User user;

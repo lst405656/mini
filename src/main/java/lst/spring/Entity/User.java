@@ -43,6 +43,7 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	private boolean enabled;
+	private String familyCode;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<Board> boardList = new ArrayList<Board>();
