@@ -104,6 +104,13 @@ public class CalendarServiceImpl implements CalendarService {
 		return cal.findbyPlanDate(pageable, date);
 	}
 
+	@Override
+	public Page<Plan> getPlanList(Plan plan, int page, Date date, String familyCode) {
+		Pageable pageable = PageRequest.of(page, 10, Sort.Direction.DESC, "seq");
+		return cal.findbyPlanDate(pageable, date,familyCode);
+	}
+
+	
 	
 	
 	

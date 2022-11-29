@@ -11,4 +11,5 @@ public interface CalendarService {
 	public List<List<Integer>> calendarView(int year, int month);
 	public void insertPlan(Plan plan);
 	Page<Plan> getPlanList(Plan plan, int page, Date date);
+	Page<Plan> getPlanList(Plan plan, int page, Date date, String familyCode);
 }

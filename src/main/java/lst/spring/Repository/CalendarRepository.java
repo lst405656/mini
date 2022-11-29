@@ -13,4 +13,6 @@ import lst.spring.Entity.Plan;
 public interface CalendarRepository extends CrudRepository<Plan, Long>, QuerydslPredicateExecutor<Plan>{
 	@Query(value = "select * from plan where plan_date = ?", nativeQuery = true)
 	Page<Plan> findbyPlanDate(Pageable pageable, Date date);
+	@Query(value = "select * from plan where plan_date = ? and family_code =?", nativeQuery = true)
+	Page<Plan> findbyPlanDate(Pageable pageable, Date date, String familyCode);
 }
