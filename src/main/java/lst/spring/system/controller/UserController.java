@@ -69,5 +69,9 @@ public class UserController{
 		return "system/main";
 	}
 	
-	
+	@RequestMapping("/mypage")
+	public String veiwMyPage(Model model) {
+		
+		return "system/myPage";
+	}
 }

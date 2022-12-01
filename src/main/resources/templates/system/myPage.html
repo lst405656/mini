@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<title>내 정보</title>
+</head>
+<link rel="stylesheet" type="text/css" th:href="@{/css/mainTeplate.css}">
+<body>
+<header>
+	<span sec:authorize="isAuthenticated()"> 
+		<b>
+			<font color="blue">
+				<span sec:authentication="principal.user.nickname"></span>
+			</font>
+		</b>님 환영합니다. <a th:href="@{/system/logout}">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a th:href="@{/system/main}">메인으로</a>	
+	</span>
+</header>
+	
+<article>
+	<div id="info" sec:authentication="principal.user.familyCode" >
+	
+	</div>
+
+
+</article>
+
+<footer>
+
+</footer>
+	
+	
+</body>
+
+</html>
