@@ -19,10 +19,23 @@
 </header>
 	
 <article>
-	<div id="info" sec:authentication="principal.user.familyCode" >
-	
+	<div id="info" >
+		<div>
+			<span>아이디 : </span><span sec:authentication="principal.user.id" > </span>
+		</div>
+		<div>
+			<span>이메일 : </span><span sec:authentication="principal.user.email" > </span>
+		</div>	
+		<div>
+			<span>닉네임 : </span><span sec:authentication="principal.user.nickname" > </span>
+		</div>
+		<div>
+			<span>전화번호 : </span><span sec:authentication="principal.user.phone" > </span>
+		</div>
+		<div>
+			<span>가족코드 : </span><span sec:authentication="principal.user.familyCode" ></span>
+		</div>
 	</div>
-
 
 </article>
 
