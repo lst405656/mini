@@ -1,8 +1,7 @@
 package lst.spring.system.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,10 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lst.spring.Entity.Constant.SocialLoginType;
 import lst.spring.Entity.Role;
 import lst.spring.Entity.User;
 import lst.spring.Entity.UserFormat;
-import lst.spring.system.calendar.CalendarService;
 import lst.spring.system.service.UserService;
 
 @Controller
@@ -51,7 +50,7 @@ public class UserController{
 		user.setNickname(format.getNickname());
 		user.setPhone(format.getPhone());
 		user.setEmail(format.getEmail());
-		user.setRole(Role.ROLE_USER);
+		user.setRole(Role.USER);
 		user.setEnabled(true);
 		userservice.saveUser(user);
 		model.addAttribute("format",format);
@@ -74,4 +73,5 @@ public class UserController{
 		
 		return "system/myPage";
 	}
+	
 }

@@ -31,7 +31,7 @@ public class CalendarRepositoryTest {
 		user1.setNickname("손오공");
 		user1.setEmail("lst4056@naver.com");
 		user1.setPhone("010-0100-0011");
-		user1.setRole(Role.ROLE_USER);
+		user1.setRole(Role.USER);
 		user1.setEnabled(true);
 		userRepo.save(user1);
 		

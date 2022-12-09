@@ -12,6 +12,9 @@ public class SecurityConfig {
 	@Autowired
 	private SecurityUserDetailsService userDetailsService;
 	
+	@Autowired
+	private CustomOAuth2UserService Oauth2UserService;
+	
 	@Bean
 	protected SecurityFilterChain configure(HttpSecurity security) throws Exception{
 		security.userDetailsService(userDetailsService);
@@ -23,6 +26,14 @@ public class SecurityConfig {
 		.defaultSuccessUrl("/system/main", true);
 		security.exceptionHandling().accessDeniedPage("/system/accessDenied");
 		security.logout().logoutUrl("/system/logout").invalidateHttpSession(true).logoutSuccessUrl("/");
+		
+		security.oauth2Login().loginPage("/system/login")// OAuth2기반의 로그인인 경우
+		.loginPage("/loginForm")		// 인증이 필요한 URL에 접근하면 /loginForm으로 이동
+		.defaultSuccessUrl("/system/main", true)// 로그인 성공하면 "/" 으로 이동
+		.failureUrl("/system/login") // 로그인 실패 시 /loginForm으로 이동
+		.userInfoEndpoint() // 로그인 성공 후 사용자정보를 가져온다
+		.userService(Oauth2UserService)
+		;
 		return security.build();
 	}
 	@Bean

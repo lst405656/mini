@@ -79,14 +79,14 @@ public class BoardRepositoryTest {
 		user1.setId("user");
 		user1.setPassword(encoder.encode("1111"));
 		user1.setNickname("손오공");
-		user1.setRole(Role.ROLE_USER);
+		user1.setRole(Role.USER);
 		user1.setEnabled(true);
 		userRepo.save(user1);
 		User user2 = new User();
 		user2.setId("admin");
 		user2.setPassword(encoder.encode("2222"));
 		user2.setNickname("사오정");
-		user2.setRole(Role.ROLE_ADMIN);
+		user2.setRole(Role.ADMIN);
 		user2.setEnabled(true);
 		userRepo.save(user2);
 		for(int i=1; i<=13; i++) {

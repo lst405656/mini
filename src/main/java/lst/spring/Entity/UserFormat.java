@@ -16,7 +16,7 @@ import lombok.Setter;
 public class UserFormat {
 
 	@NotBlank(message = "아이디는 필수 입력 값입니다.")
-    private String id;
+    private Long id;
 
 	@NotBlank(message = " 닉네임은 필수 입력 값입니다.")
 	private String nickname;
@@ -35,5 +35,7 @@ public class UserFormat {
 
     @NotEmpty(message = " 전화번호는 필수 입력 값입니다.")
     private String phone;
+    
+    private String familyCode;
     
 }
