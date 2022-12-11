@@ -8,7 +8,7 @@ public class SecurityUser extends User{
 	private lst.spring.Entity.User u;
 	
 	public SecurityUser(lst.spring.Entity.User u) {
-		super(u.getId(), u.getPassword(), AuthorityUtils.createAuthorityList(u.getRole().toString()));
+		super(String.valueOf(u.getId()), u.getPassword(), AuthorityUtils.createAuthorityList(u.getRole().toString()));
 		this.u = u;
 	}
 	public lst.spring.Entity.User getUser() {

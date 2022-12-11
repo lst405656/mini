@@ -7,13 +7,10 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/mainTeplate.css}">
 <body>
 <header>
-	<span sec:authorize="isAuthenticated()"> <b> <font
-			color="blue"> <span
-				sec:authentication="principal.user.nickname"></span>
-		</font>
-	</b>님 환영합니다. <a th:href="@{/system/logout}">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <span id="login-user" th:text="${userName}">사용자</span> 님, 안녕하세요.
+	
+	<a th:href="@{/system/logout}">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		
-	</span>
 </header>
 	
 <article>

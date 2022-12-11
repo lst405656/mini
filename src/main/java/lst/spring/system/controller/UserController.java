@@ -1,8 +1,8 @@
 package lst.spring.system.controller;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import lst.spring.Entity.Constant.SocialLoginType;
 import lst.spring.Entity.Role;
+import lst.spring.Entity.SessionUser;
 import lst.spring.Entity.User;
 import lst.spring.Entity.UserFormat;
 import lst.spring.system.service.UserService;
@@ -27,6 +26,8 @@ public class UserController{
 	
 	@Autowired
 	private UserService userservice;
+	
+	private HttpSession httpSession;
 
 	@GetMapping("/register")
 	public String reg(UserFormat format, Model model) {
@@ -62,6 +63,13 @@ public class UserController{
 		LocalDate now = LocalDate.now();
 		int year = now.getYear();
 		int month = now.getMonth().getValue();
+		
+		SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        if(user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userImg", user.getPicture());
+        }
+		
 		
 		model.addAttribute("month",month);
 		model.addAttribute("year", year);
