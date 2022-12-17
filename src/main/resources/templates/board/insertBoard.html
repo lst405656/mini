@@ -14,7 +14,7 @@
 			</tr>
 			<tr>
 				<td bgcolor="orange" th:text="작성자"></td>
-				<td><span sec:authentication="principal.user.nickname"></span></td>
+				<td><span th:text="${userName}"></span></td>
 			</tr>
 			<tr>
 				<td bgcolor="orange" th:text="내용"></td>

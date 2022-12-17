@@ -2,6 +2,7 @@ package lst.spring.system.controller;
 
 import java.time.LocalDate;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -59,11 +60,11 @@ public class UserController{
 	}
 	
 	@RequestMapping("/main")
-	public String main(Model model){
+	public String main(Model model, HttpServletRequest request){
 		LocalDate now = LocalDate.now();
 		int year = now.getYear();
 		int month = now.getMonth().getValue();
-		
+		httpSession = request.getSession();
 		SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if(user != null) {
             model.addAttribute("userName", user.getName());
