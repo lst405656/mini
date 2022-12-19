@@ -32,8 +32,7 @@ public class User {
 
 	@Id
 	@Column(name = "ID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private String id;
 	private String password;
 	private String nickname;
 	private String email;
