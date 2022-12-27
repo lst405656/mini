@@ -7,8 +7,9 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/mainTeplate.css}">
 <body>
 <header>
-    <span id="login-user" th:text="${userName}">사용자</span> 님, 안녕하세요.
 	
+    <span id="login-user" th:if ="${userName != null}"th:text="${userName}">사용자</span> 님, 안녕하세요.
+	<span th:nuless="${userName != null}" sec:authentication="principal.username"></span>
 	<a th:href="@{/system/logout}">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		
 </header>
